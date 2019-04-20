@@ -36,8 +36,8 @@ export class Posts extends Component {
     return (
       <div>
        <h2>Previous data</h2>
-       <Grid container spacing={24}>
-        <Grid item xs={12} md={6}>
+       <Grid container spacing={24} >
+        <Grid item xs={12} md={5}>
         <List>{ this.state.post.map(post =>
           <ListItem>
             <ListItemText>Burned: {post.burned}, Consumed: {post.consumed}, Time: {post.createdAt}</ListItemText>
@@ -49,7 +49,7 @@ export class Posts extends Component {
           </ListItem> )}
         </List>
         </Grid>
-        <Grid item xs={12} sm={4} style={{paddingTop: '50px'}}>
+        <Grid item xs={12} sm={5} style={{paddingTop: '50px', paddingLeft: "150px"}}>
           <Chart posts={this.state.post}/>
         </Grid>
         </Grid>

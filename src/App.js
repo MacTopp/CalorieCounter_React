@@ -6,7 +6,8 @@ import axios from 'axios';
 import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-
+import { BrowserRouter as Router, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class App extends Component {
   state = {
@@ -71,10 +72,12 @@ addPost = (e) => {
 
   render() {
     return (
-      <div className="App">
+      <Router>
+      <div className="App" style={{backgroundColor: "#F1FCFF"}}>
+     
         <div className="Title">
-          <header>
-            <h1 style={titleStyle}>Working with React</h1>
+          <header >
+            <h1 style={titleStyle}>Calorie Counting!</h1>
           </header>
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', paddingBottom: '15px'}}>
@@ -104,14 +107,14 @@ addPost = (e) => {
         <button type="submit" onClick={this.addPost}>Submit data</button>
         
       </div>
-      
+      </Router>
     );
   }
 }
 
 const titleStyle = {
   textAlign: 'center',
-  backgroundColor: 'grey',
+  backgroundColor: '#99C5DF',
 }
 
 const cStyle = {
