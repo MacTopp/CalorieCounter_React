@@ -64,7 +64,7 @@ export class Excersize extends Component {
 
     }
   render() {
-
+    
     const options = [
         0, 5, 10, 15, 20, 25, 30, 45, 60
     ]

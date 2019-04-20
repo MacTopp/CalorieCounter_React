@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Calories from './components/Calories'
 import Excersize from './components/Excersize'
-
-
+import Post from './components/Posts'
+import axios from 'axios';
 import './App.css';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+
 
 class App extends Component {
   state = {
@@ -34,7 +37,7 @@ class App extends Component {
         burned = values.length * 10; // average of 10 calories burned / min
         break;
 
-      case "Bike":
+      case "Biked":
         burned = values.length * 5;
         break;
       
@@ -54,29 +57,54 @@ class App extends Component {
   this.setState({left: temp});
   }
 
+addPost = (e) => {
+  console.log("here")
+  const con = this.arrSum(this.state.amount);
+  const burn = con - this.state.left;
+  console.log(con, burn)
+  axios.post(`http://localhost:5000/api/post`, { consumed: con, burned: burn })
+      .then(res => {
+  
+      })
+  window.location.reload();
+    }
+
   render() {
     return (
       <div className="App">
         <div className="Title">
-        <header>
-          <h1 style={titleStyle}>Working with React</h1>
-        </header>
+          <header>
+            <h1 style={titleStyle}>Working with React</h1>
+          </header>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row'}}>
-       
+        <div style={{ display: 'flex', flexDirection: 'row', paddingBottom: '15px'}}>
+        
           <div className="Calories" style={cStyle}>
             <Calories addCalories={this.addCalories}/>
             <p>Total Calories: {this.arrSum(this.state.amount)}</p>
           </div>
-          <div className="Excersize" style={eStyle}>
-            <Excersize addExcersize={this.addExcersize}/>
-            
-          </div>
+          <Grid item xs={3}>
+            <div className="Excersize" style={eStyle}>
+              <Excersize addExcersize={this.addExcersize}/>
+              
+            </div>
+          </Grid>
           <div className="Remaining" style={eStyle}>
-          <p>Calories left to burn: {this.state.left}</p>
+            <p>Calories left to burn: {this.state.left}</p>
           </div>
+      
         </div>
+
+        <Divider variant="middle" />
+        <Grid container spacing={24}>
+        <Grid item xs={12}>
+          <Post/>
+        </Grid>
+        </Grid>
+        <button type="submit" onClick={this.addPost}>Submit data</button>
+        
       </div>
+      
     );
   }
 }
